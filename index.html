@@ -33,17 +33,22 @@
     <section class="row controls" v-if="gameStarted">
         <div class="small-12 columns">
             <button id="attack" @click="attack">ATTACK</button>
-            <button id="special-attack">SPECIAL ATTACK</button>
-            <button id="heal">HEAL</button>
+            <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+            <button id="heal" @click="healUp">HEAL</button>
             <button id="give-up" @click="giveUp">GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="battleLog.length">
         <div class="small-12 columns">
             <ul>
-                <li>
-
-                </li>
+                <template v-for="log in battleLog">
+                    <template v-for="(value, key) in log">
+                        <li v-if="key === 'monster'" class="monster-turn">{{value}}</li>
+                        <li v-else class="player-turn">
+                            {{value}}
+                        </li>
+                    </template>
+                </template>
             </ul>
         </div>
     </section>
